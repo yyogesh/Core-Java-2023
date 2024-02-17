@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+    <bean id="developer" class="org.ysquare.Developer" autowire="byType">
+        <property name="age" value="21"/>
+        <property name="computer">
+            <bean class="org.ysquare.Desktop" />
+        </property>
+<!--        <property name="computer" ref="desktop1"/>-->
+<!--        <property name="age" value="21"/>-->
+<!--        <property name="laptop" ref="laptop1"/>-->
+<!--        <constructor-arg value="21"  />-->
+<!--        <constructor-arg ref="laptop1" />-->
+<!--        <constructor-arg ref="laptop1" index="1" />-->
+<!--        <constructor-arg value="21" index="0" />-->
+
+<!--        <constructor-arg ref="laptop1" name="laptop" />-->
+<!--        <constructor-arg value="21" name="age"/>-->
+
+    </bean>
+
+    <bean id="desktop1" class="org.ysquare.Laptop" />
+<!--    <bean id="computer" class="org.ysquare.Computer"/>-->
+    <bean id="computer" class="org.ysquare.Desktop" lazy-init="true"/>
+</beans>
