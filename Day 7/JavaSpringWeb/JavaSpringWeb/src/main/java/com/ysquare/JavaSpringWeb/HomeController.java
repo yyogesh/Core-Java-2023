@@ -4,15 +4,25 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
+    @ModelAttribute("subject")
+    public String courseName(){
+        return "Java Spring";
+    }
     @RequestMapping("/")
     public String home() {
         return "index";
+    }
+
+    @RequestMapping("/developer")
+    public String developer() {
+        return "developer";
     }
 
     @RequestMapping("/add")
@@ -22,6 +32,28 @@ public class HomeController {
         int num2 = Integer.parseInt(request.getParameter("num2"));
         session.setAttribute("result", num1 + num2);
         return "result";
+    }
+
+    @RequestMapping("/addDeveloper")
+    public String addDeveloper(Developer developer) {
+        return "developerResult";
+    }
+
+    @RequestMapping("/addDeveloper2")
+    public String addDeveloper2(@ModelAttribute Developer developer) {
+        return "developerResult";
+    }
+
+
+    @RequestMapping("/addDeveloper1")
+    public ModelAndView addDeveloper1(@RequestParam("aid") int aid, @RequestParam("aname") String aname, ModelAndView modelAndView) {
+        Developer developer = new Developer();
+        developer.setAid(aid);
+        developer.setAname(aname);
+
+        modelAndView.addObject("developer", developer);
+        modelAndView.setViewName("developerResult");
+        return modelAndView;
     }
 
     @RequestMapping("/sum")
